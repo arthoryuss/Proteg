@@ -1,0 +1,242 @@
+{% extends "base.html" %}
+{% load static %}
+{% block init %}
+
+ <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box">
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="{% url 'sinistros:violacoes'%}">Voltar</a></li> 
+                                        
+                                        </ol>
+    </div>
+                            </div>
+                        </div>     
+
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+
+                                        <!-- Invoice Logo-->
+                                        <div class="clearfix">
+                                            <div class="float-left mb-3">
+                                                <img src="{% static 'assets/images/123.png' %}"  alt="" height="55">
+                                            </div>
+                                            <div class="float-right">
+                                                <h4 class="m-0 d-print-none">Violação #{{detail.id}}</h4>
+                                            </div>
+                                        </div>
+
+                                        <!-- Invoice Detail-->
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="float-left mt-3">
+                                                    <p class="font-15"><strong>Conta: </strong> &nbsp;&nbsp;&nbsp;{{detail.conta}}
+                                                    <p class="font-15"><strong>Cliente: </strong> &nbsp;&nbsp;&nbsp;{{detail.cliente}}
+                                                    <p class="font-15"><strong>Contato: </strong> &nbsp;&nbsp;&nbsp;{{detail.nome_contato}}
+                                                    <p class="font-15"><strong>Cidade: </strong> &nbsp;&nbsp;&nbsp;{{detail.cidade}}
+                                                    <p class="font-15"><strong>Bairro: </strong> &nbsp;&nbsp;&nbsp;{{detail.bairro}}
+                                                </div>
+            
+                                            </div><!-- end col -->
+                                            <div class="col-sm-4 offset-sm-2">
+                                                <div class="mt-3 float-sm-right">
+                                                    <p class="font-13"><strong>Data da violação: </strong> &nbsp;&nbsp;&nbsp;{{detail.data}}
+                                                    <p class="font-13"><strong>Horário Inicial: </strong> &nbsp;&nbsp;&nbsp;{{detail.horario_inicio}}
+                                                    <p class="font-13"><strong>Horário Final: </strong>  &nbsp;&nbsp;&nbsp;{{detail.horario_fim}}
+                                                </div>
+                                            </div><!-- end col -->
+                                        </div>
+                                        <!-- end row -->
+
+
+                                        </div>    
+                                    </div>
+                                </div>
+                           
+                             <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                        &nbsp
+                                        &nbsp
+                                        &nbsp
+                                        &nbsp
+                                        &nbsp
+                                        &nbsp
+                                        &nbsp
+                                        &nbsp
+                                        &nbsp
+                                        &nbsp
+                                        &nbsp
+                                        &nbsp
+                                        {% if detail.tecnica == 'sim' %}
+                                        <div class=" col-lg-2 alert alert-success" role="alert">
+                                            <div class="grid-container">
+     Sitema Funcionou? <strong> Sim</strong>
+                                            </div>
+
+                                        </div>
+                                        {% elif detail.tecnica == 'nao' %}
+                                        <div class=" col-lg-2 alert alert-danger" role="alert">
+                                            <div class="grid-container">
+     Sitema Funcionou? <strong> Não</strong>
+                                            </div>
+
+                                        </div>
+                                        {% endif %}
+                                        &nbsp
+                                        &nbsp
+                                        &nbsp
+                                        &nbsp
+                                        &nbsp
+                                        &nbsp
+                                        &nbsp
+                                        &nbsp
+
+                                        {% if detail.procedimento == 'sim' %}
+                                        <div class=" col-lg-2 alert alert-success" role="alert">
+                                            <div class="grid-container">
+     Procedimento foi seguido? <strong> Sim</strong>
+                                            </div>
+
+                                        </div>
+                                        {% elif detail.procedimento == 'nao' %}
+                                        <div class=" col-lg-2 alert alert-danger" role="alert">
+                                            <div class="grid-container">
+     Procedimento foi seguido? <strong> Não</strong>
+                                            </div>
+
+                                        </div>
+                                        {% endif %}
+                                        &nbsp
+                                        &nbsp
+                                        &nbsp
+                                        &nbsp
+                                        &nbsp
+                                        &nbsp
+                                        &nbsp
+                                        &nbsp
+                                        {% if detail.tratativa == 'sim' %}
+                                        <div class=" col-lg-2 alert alert-success" role="alert">
+                                            <div class="grid-container">
+     Processo    foi finalizado? <strong> Sim</strong>
+                                            </div>
+
+                                        </div>
+                                        {% elif detail.tratativa == 'nao' %}
+                                        <div class=" col-lg-2 alert alert-danger" role="alert">
+                                            <div class="grid-container">
+     Processo foi finalizado? <strong> Não</strong>
+                                            </div>
+
+                                        </div>
+                                        {% endif %}
+                                        &nbsp
+                                        &nbsp
+                                        &nbsp
+                                        &nbsp
+                                        &nbsp
+                                        &nbsp
+                                        &nbsp
+                                        &nbsp
+                                        {% if detail.ressarcimento == 0 %}
+                                        <div class=" col-lg-2 alert alert-success" role="alert">
+                                            <div class="grid-container">
+     Ressarcimento (em meses): <strong> 0</strong>
+                                            </div>
+
+                                        </div>
+                                        {% else %}
+                                        <div class=" col-lg-2 alert alert-danger" role="alert">
+                                            <div class="grid-container">
+     Ressarcimento (em meses): <strong> {{detail.ressarcimento}}</strong>
+                                            </div>
+
+                                        </div>
+                                        {% endif %}
+
+                                        </div>
+
+                                        </div>
+                                        </div>
+                                      </div>
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h3 class="page-title">Comentários</h3>
+                                         <p class="text-muted font-13 mb-3">
+                                            {% for x in detail2 %}
+                                                 <div class="card bg-secondary text-white">
+                                                    <div class="card-body">
+                                                    <p align="justify">{{x.comentario}}</p>
+                                                    <small class="float-right">Postado por {{x.user.first_name}} {{x.user.last_name}} em {{x.data}}</small>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                          <button type="button" class="btn btn-primary btn-rounded float-right" data-toggle="modal" data-target="#primary-header-modal"><i class="mdi mdi-plus"></i> Add Comentário</button> 
+                                          <div id="primary-header-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="primary-header-modalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header modal-colored-header bg-primary">
+                                                        <h4 class="modal-title" id="primary-header-modalLabel">Novo Comentário</h4>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                    </div>
+                                                    <form method="post" >
+                                                    {% csrf_token %}
+                                                    {% load crispy_forms_tags %}
+                                                    <div class="modal-body">
+                                                    {{ form.comentario|as_crispy_field}} 
+                                                    {{ form.comentarioerros }}
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+                                                        <button type="submit" class="btn btn-primary">Salvar</button>
+                                                    </div>
+                                                </div><!-- /.modal-content -->
+                                            </div><!-- /.modal-dialog -->
+                                        </div><!-- /.modal -->
+                                         </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                        &nbsp
+                                        &nbsp
+                                        &nbsp
+                                        &nbsp
+                                        &nbsp
+                                        &nbsp
+                                        &nbsp
+                                        &nbsp
+                                        &nbsp
+                                        &nbsp
+                                        &nbsp
+                                        &nbsp
+                                       <button type="button" class="btn btn-primary btn-lg">Baixar BI</button>
+                                        &nbsp
+                                        &nbsp
+                                        &nbsp
+                                        &nbsp
+                                        &nbsp
+                                        &nbsp
+                                        &nbsp
+                                        &nbsp
+                                        &nbsp
+                                        &nbsp
+                                        &nbsp
+                                        &nbsp
+                                       <a type="button" class="btn btn-primary btn-lg">Baixar Relatório</a>
+                                    </div>
+                                </div>
+                            </div>
+                                   </div>
+                               </div>
+                           </div>
+
+                                        <!-- end row -->        
+{% endblock %}

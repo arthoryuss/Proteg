@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block init %}
+<br>
+<h4 class="page-title">Violações</h4>
+<br>
+ <div class="row">
+    <div class="col-12">
+         <div class="card">
+             <div class="card-body">
+                <table id="basic-datatable" class="table table-striped dt-responsive nowrap w-100">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Conta</th>
+                                                        <th>Cliente</th>
+                                                        <th>Cidade</th>
+                                                        <th>Bairro</th>
+                                                        <th>Data</th>
+                                                        <th>Finalizado</th>
+                                                        <th>Ações</th>
+                                                    </tr>
+                                                </thead>
+
+
+                                                <tbody>
+                                                    {% for x in info %}
+                                                    <tr>
+                                                        <td>{{x.conta}}</td>
+                                                        <td>{{x.cliente}}</td>
+                                                        <td>{{x.cidade}}</td>
+                                                        <td>{{x.bairro}}</td>
+                                                        <td>{{x.data}}</td>
+                                                        {% if x.tratativa == 'sim' %}
+                                                        <td><span class="badge badge-success badge-pill">Sim</span></td>
+                                                        {% elif x.tratativa == 'nao' %}
+                                                        <td><span class="badge badge-danger badge-pill">Não</span></td>
+                                                        {% endif %}
+                                                                   <td class="table-action">
+                <a href="javascript: void(0);" class="action-icon"> <i class="mdi mdi-pencil"></i></a>
+                <a href="javascript: void(0);" class="action-icon"> <i class="mdi mdi-delete"></i></a>
+                <a href="{% url 'sinistros:detalhes' x.id %}" class="action-icon"> <i class="mdi mdi-eye"></i></a>
+                                                    </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+{% endblock %}
